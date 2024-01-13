@@ -1,8 +1,8 @@
-import openai
-from flask import Flask, url_for, render_template, redirect, request, jsonify
+from flask import Flask, url_for, render_template, redirect, request, session
 from openai import OpenAI
 import requests
 import json
+import secrets
 
 client = OpenAI(api_key='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')
 
@@ -16,6 +16,7 @@ carbon_counter = client.beta.assistants.retrieve(assistant_id='asst_qiKqmLTo9D8i
 thread = client.beta.threads.create()
 
 app = Flask(__name__)
+app.secret_key = secrets.token_urlsafe(16)
 
 shopping_list = []
 
@@ -98,6 +99,11 @@ def transit():
 
 @app.route('/shopping', methods=['GET', 'POST'])
 def shopping():
+    if 'shopping_list_parsed' in session:
+        shopping_list_parsed = session['shopping_list_parsed']
+    else:
+        shopping_list_parsed = []
+
     if request.method == 'POST':
         item = request.form.get('item')
         quantity = int(request.form.get('quantity'))
@@ -108,7 +114,7 @@ def shopping():
             'quantity': quantity,
         })
 
-    return render_template('shopping.html', shopping_list=shopping_list)
+    return render_template('shopping.html', shopping_list=shopping_list, shopping_list_parsed=shopping_list_parsed)
 
 
 @app.route('/remove_item', methods=['POST'])
@@ -144,9 +150,20 @@ def get_json():
                 thread_id=thread.id
             )
 
-            gpt_output = str(messages.data[0].content[0].text.value)
-            shopping_list_parsed = (json.dumps(gpt_output))
+            shopping_list_parsed = str(messages.data[0].content[0].text.value)
+
             print(shopping_list_parsed)
+            print(json.loads(shopping_list_parsed))
+
+            # Separate dictionaries and string
+            dictionaries = [item for item in shopping_list_parsed if isinstance(item, dict)]
+            string_element = next((item for item in shopping_list_parsed if isinstance(item, str)), None)
+
+            # Print the Python-friendly representation
+            print(dictionaries)
+            print(string_element)
+
+            session['shopping_list_parsed'] = shopping_list_parsed
 
             return redirect(url_for('shopping'))
 
@@ -155,39 +172,4 @@ if __name__ == "__main__":
     app.run(debug=True)
 
 
-from flask import Flask, render_template, request
-import polyline
-
-app = Flask(__name__)
-
-# ... (other functions)
-
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
-        origin_location = request.form['origin_location']
-        destination_location = request.form['destination_location']
-
-        # Call your functions here
-        distance, route = calculate_distance_and_route(google_maps_api_key, origin_location, destination_location)
-
-        if distance and route:
-            # Decode the polyline string
-            decoded_route = polyline.decode(route)
-
-            # Estimate carbon emissions (replace with your chosen carbon estimation logic)
-            carbon_emission_estimate = estimate_carbon_emissions(distance, transportation_mode='driving')
-
-            # Suggest alternate route with transit
-            transit_route = suggest_alternate_route(google_maps_api_key, origin_location, destination_location)
-
-            return render_template('result.html', distance=distance, decoded_route=decoded_route,
-                                   carbon_emission_estimate=carbon_emission_estimate, transit_route=transit_route)
-        else:
-            return render_template('error.html')
-
-    return render_template('index.html')
-
-if __name__ == '__main__':
-    app.run(debug=True)
 
