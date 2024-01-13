@@ -16,8 +16,10 @@
             overflow: hidden;
         }
         
-        .navbar a.brand {
+        .navbar p.brand {
             float: left;
+            display: block;
+            text-align: left;
         }
 
         .navbar a.link {
@@ -30,7 +32,7 @@
             text-align: left;
         }
 
-        .navbar a {
+        .navbar a{
             float: left;
             display: block;
             color: white;
@@ -49,7 +51,7 @@
         }
 
         @media screen and (max-width: 600px) {
-            .navbar a:not(:first-child) {
+            .navbar a.link {
                 display: none;
             }
             .navbar a.icon {
@@ -81,10 +83,10 @@
     <a href="#" class="icon" onclick="toggleNavbar()">
         <i class="fa fa-bars"></i>
     </a>
-    <a href="#" class="brand">CarbonSense</a>
-    <a href="#" class="link">Link 1</a>
-    <a href="#" class="link">Link 2</a>
-    <a href="#" class="link">Link 3</a>
+    <p class="brand">CarbonSense</p>
+    <a href="#" class="link">Travel Planner</a>
+    <a href="#" class="link">Household Utilities</a>
+    <a href="#" class="link">Carbon Calculator</a>
 </div>
 
 {% block content %}{% endblock %}
