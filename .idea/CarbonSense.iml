@@ -4,11 +4,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
-<<<<<<< HEAD
-    <orderEntry type="jdk" jdkName="Python 3.10 (CarbonSense) (2)" jdkType="Python SDK" />
-=======
     <orderEntry type="jdk" jdkName="Python 3.11 (CarbonSense)" jdkType="Python SDK" />
->>>>>>> cadb5b12d36b83dede2fbd4c01fe6aca7f87a0c9
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

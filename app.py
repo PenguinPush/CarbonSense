@@ -93,8 +93,7 @@ def transit():
                 print(f"Suggested Transit Route: {transit_route}")
         else:
             print("Error in route calculation.")
-    return render_template('transit.html')
-
+    return render_template('transit.html', distance=distance, decoded_route="wtf is a decoded route", carbon_emission_estimate=carbon_emission_estimate, transit_route=transit_route)
 
 
 @app.route('/shopping', methods=['GET', 'POST'])
