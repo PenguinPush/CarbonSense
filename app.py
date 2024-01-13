@@ -6,7 +6,7 @@ shopping_list = []
 
 @app.route("/")
 def home():
-    return redirect(url_for('/shopping'))
+    return redirect(url_for('shopping'))
 
 
 @app.route('/transit')
