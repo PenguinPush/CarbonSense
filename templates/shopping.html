@@ -15,9 +15,6 @@
         <label for="quantity">Quantity:</label>
         <input type="number" id="quantity" name="quantity" min="1" required>
 
-        <label for="weight">Weight (kg):</label>
-        <input type="number" id="weight" name="weight" step="0.01" min="0" required>
-
         <button type="submit">Add to Shopping List</button>
     </form>
 
@@ -26,8 +23,7 @@
         {% for item in shopping_list %}
             <li>
                 {{ item['item'] }} -
-                Quantity: {{ item['quantity'] }} -
-                Weight: {{ item['weight'] }} kg
+                Quantity: {{ item['quantity'] }}
             </li>
         {% endfor %}
     </ul>

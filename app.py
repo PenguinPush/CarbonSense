@@ -19,13 +19,11 @@ def shopping():
     if request.method == 'POST':
         item = request.form.get('item')
         quantity = int(request.form.get('quantity'))
-        weight = float(request.form.get('weight', 0))
 
         # Append the item, quantity, and weight to the shopping list
         shopping_list.append({
             'item': item,
             'quantity': quantity,
-            'weight': weight
         })
 
     return render_template('shopping.html', shopping_list=shopping_list)
