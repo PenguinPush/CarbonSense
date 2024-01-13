@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Sense | Shopping Tracker</title>
+</head>
+<body>
+    <h1>Shopping Tracker</h1>
+    <form method="post" action="/shopping">
+        <label for="item">Item:</label>
+        <input type="text" id="item" name="item" required>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" min="1" required>
+
+        <button type="submit">Add to Shopping List</button>
+    </form>
+
+    <h2>Shopping List</h2>
+    <ul>
+        {% for item in shopping_list %}
+            <li>{{ item['item'] }} - Quantity: {{ item['quantity'] }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('get_json') }}" target="_blank">Get JSON</a>
+</body>
+</html>
