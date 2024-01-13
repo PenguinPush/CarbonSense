@@ -130,3 +130,40 @@ def get_json():
 if __name__ == "__main__":
     app.run(debug=True)
 
+
+from flask import Flask, render_template, request
+import polyline
+
+app = Flask(__name__)
+
+# ... (other functions)
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        origin_location = request.form['origin_location']
+        destination_location = request.form['destination_location']
+
+        # Call your functions here
+        distance, route = calculate_distance_and_route(google_maps_api_key, origin_location, destination_location)
+
+        if distance and route:
+            # Decode the polyline string
+            decoded_route = polyline.decode(route)
+
+            # Estimate carbon emissions (replace with your chosen carbon estimation logic)
+            carbon_emission_estimate = estimate_carbon_emissions(distance, transportation_mode='driving')
+
+            # Suggest alternate route with transit
+            transit_route = suggest_alternate_route(google_maps_api_key, origin_location, destination_location)
+
+            return render_template('result.html', distance=distance, decoded_route=decoded_route,
+                                   carbon_emission_estimate=carbon_emission_estimate, transit_route=transit_route)
+        else:
+            return render_template('error.html')
+
+    return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+

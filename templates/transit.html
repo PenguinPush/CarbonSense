@@ -10,10 +10,14 @@
     </style>
 </head>
 <body>
-    {% extends "layout.html" %}
-
+    {% extends 'base.html' %}
     {% block content %}
-        <a href="/HOME">go home</a>
+    <h1>Route Estimation - Result</h1>
+    <p>Distance: {{ distance }}</p>
+    <p>Decoded Route: {{ decoded_route }}</p>
+    <p>Carbon Emission Estimate: {{ carbon_emission_estimate }} kgCO2</p>
+    <p>Suggested Transit Route: {{ tr
+        ansit_route }}</p>
     {% endblock %}
 </body>
 </html>
