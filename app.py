@@ -1,5 +1,18 @@
+import openai
 from flask import Flask, url_for, render_template, redirect, request, jsonify
-import requests
+from openai import OpenAI
+
+client = OpenAI(api_key='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')
+
+# carbon_counter = client.beta.assistants.create(
+#     instructions="Treat an input of a JSON shopping list with parameters like item, quantity, and weight and return an estimate of carbon emissions in metric format for each item purchased in a JSON format with the parameters item, quantity, and carbon emissions per item. Use your knowledge to calculate it.",
+#     name="Carl the Carbon Counter",
+#     model="gpt-4",
+# )
+
+carbon_counter = client.beta.assistants.retrieve(assistant_id='asst_5f1AdNw2sy4HOQwCufkdZqtH')
+
+print(carbon_counter)
 
 app = Flask(__name__)
 
@@ -88,31 +101,35 @@ def suggest_alternate_route(api_key, origin, destination):
         return None
 
 
-def estimate_carbon_emissions(distance, transportation_mode):
-    # Replace with your chosen carbon estimation logic
-    # This is a placeholder, and you may need to implement or use a specific API for this purpose
-    return 0  # Replace with the actual carbon emission estimate
+from flask import Flask, render_template, request
 
+app = Flask(__name__)
 
-if __name__ == "__main__":
-    google_maps_api_key = 'AIzaSyCMPdLpbgwvxDXT02Fwk8mqHfNPqop6rxk'
+# Paste your functions here
 
-    # Get user input for origin and destination
-    origin_location = input("Enter the origin location: ")
-    destination_location = input("Enter the destination location: ")
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        origin_location = request.form['origin_location']
+        destination_location = request.form['destination_location']
 
-    distance, route = calculate_distance_and_route(google_maps_api_key, origin_location, destination_location)
-    if distance and route:
-        print(f"Distance: {distance}")
-        print(f"Route: {route}")
+        # Call your functions here
+        distance, route = calculate_distance_and_route(google_maps_api_key, origin_location, destination_location)
 
-        # Estimate carbon emissions (replace with your chosen carbon estimation logic)
-        carbon_emission_estimate = estimate_carbon_emissions(distance, transportation_mode='driving')
-        print(f"Carbon Emission Estimate: {carbon_emission_estimate} kgCO2")
+        if distance and route:
+            # Estimate carbon emissions (replace with your chosen carbon estimation logic)
+            carbon_emission_estimate = estimate_carbon_emissions(distance, transportation_mode='driving')
 
-        # Suggest alternate route with transit
-        transit_route = suggest_alternate_route(google_maps_api_key, origin_location, destination_location)
-        if transit_route:
-            print(f"Suggested Transit Route: {transit_route}")
-    else:
-        print("Error in route calculation.")
+            # Suggest alternate route with transit
+            transit_route = suggest_alternate_route(google_maps_api_key, origin_location, destination_location)
+
+            return render_template('result.html', distance=distance, route=route,
+                                   carbon_emission_estimate=carbon_emission_estimate, transit_route=transit_route)
+        else:
+            return render_template('error.html')
+
+    return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
