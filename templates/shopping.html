@@ -11,6 +11,8 @@
 
     {% block title %}:3 :3 :3 :3{% endblock %}
 
+    {% block content %}
+
     <h1>Shopping Tracker</h1>
     <form method="post" action="/shopping">
         <label for="item">Item:</label>
@@ -36,5 +38,8 @@
     </ul>
 
     <a href="{{ url_for('get_json') }}" target="_blank">Get JSON</a>
+
+    {% endblock %}
+
 </body>
 </html>
