@@ -14,6 +14,7 @@ def transit():
     return render_template('transit.html')
 
 
+
 @app.route('/shopping', methods=['GET', 'POST'])
 def shopping():
     if request.method == 'POST':
@@ -46,3 +47,77 @@ def get_json():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+import requests
+
+import requests
+
+
+def calculate_distance_and_route(api_key, origin, destination):
+    base_url = "https://maps.googleapis.com/maps/api/directions/json"
+    params = {
+        'origin': origin,
+        'destination': destination,
+        'key': api_key,
+    }
+
+    response = requests.get(base_url, params=params)
+    data = response.json()
+
+    if data['status'] == 'OK':
+        # Extract distance and route information
+        distance = data['routes'][0]['legs'][0]['distance']['text']
+        route = data['routes'][0]['overview_polyline']['points']
+        return distance, route
+    else:
+        return None, None
+
+
+def suggest_alternate_route(api_key, origin, destination):
+    base_url = "https://maps.googleapis.com/maps/api/directions/json"
+    params = {
+        'origin': origin,
+        'destination': destination,
+        'mode': 'transit',
+        'key': api_key,
+    }
+
+    response = requests.get(base_url, params=params)
+    data = response.json()
+
+    if data['status'] == 'OK':
+        # Extract alternate route information
+        transit_route = data['routes'][0]['overview_polyline']['points']
+        return transit_route
+    else:
+        return None
+
+
+def estimate_carbon_emissions(distance, transportation_mode):
+    # Replace with your chosen carbon estimation logic
+    # This is a placeholder, and you may need to implement or use a specific API for this purpose
+    return 0  # Replace with the actual carbon emission estimate
+
+
+if __name__ == "__main__":
+    google_maps_api_key = 'AIzaSyCMPdLpbgwvxDXT02Fwk8mqHfNPqop6rxk'
+
+    # Get user input for origin and destination
+    origin_location = input("Enter the origin location: ")
+    destination_location = input("Enter the destination location: ")
+
+    distance, route = calculate_distance_and_route(google_maps_api_key, origin_location, destination_location)
+    if distance and route:
+        print(f"Distance: {distance}")
+        print(f"Route: {route}")
+
+        # Estimate carbon emissions (replace with your chosen carbon estimation logic)
+        carbon_emission_estimate = estimate_carbon_emissions(distance, transportation_mode='driving')
+        print(f"Carbon Emission Estimate: {carbon_emission_estimate} kgCO2")
+
+        # Suggest alternate route with transit
+        transit_route = suggest_alternate_route(google_maps_api_key, origin_location, destination_location)
+        if transit_route:
+            print(f"Suggested Transit Route: {transit_route}")
+    else:
+        print("Error in route calculation.")
