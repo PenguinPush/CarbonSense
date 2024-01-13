@@ -28,6 +28,17 @@ def shopping():
 
     return render_template('shopping.html', shopping_list=shopping_list)
 
+
+@app.route('/remove_item', methods=['POST'])
+def remove_item():
+    item_to_remove = request.form.get('item_to_remove')
+
+    # Remove the item from the shopping list
+    shopping_list[:] = [item for item in shopping_list if item['item'] != item_to_remove]
+
+    return redirect(url_for('shopping'))
+
+
 @app.route('/get_json')
 def get_json():
     # Convert the shopping list to JSON and return it
