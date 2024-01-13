@@ -2,6 +2,7 @@ import openai
 from flask import Flask, url_for, render_template, redirect, request, jsonify
 from openai import OpenAI
 import requests
+import json
 
 client = OpenAI(api_key='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')
 
@@ -11,9 +12,8 @@ client = OpenAI(api_key='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')
 #     model="gpt-4",
 # )
 
-carbon_counter = client.beta.assistants.retrieve(assistant_id='asst_5f1AdNw2sy4HOQwCufkdZqtH')
-
-print(carbon_counter)
+carbon_counter = client.beta.assistants.retrieve(assistant_id='asst_qiKqmLTo9D8iwgCdOYezPno4')
+thread = client.beta.threads.create()
 
 app = Flask(__name__)
 
@@ -122,8 +122,33 @@ def remove_item():
 
 @app.route('/get_json')
 def get_json():
-    # Convert the shopping list to JSON and return it
-    return jsonify(shopping_list)
+    message = client.beta.threads.messages.create(
+        thread_id=thread.id,
+        role="user",
+        content=json.dumps(shopping_list)
+    )
+
+    run = client.beta.threads.runs.create(
+        thread_id=thread.id,
+        assistant_id=carbon_counter.id
+    )
+
+    while True:
+        run = client.beta.threads.runs.retrieve(
+            thread_id=thread.id,
+            run_id=run.id
+        )
+
+        if run.status == "completed":
+            messages = client.beta.threads.messages.list(
+                thread_id=thread.id
+            )
+
+            gpt_output = str(messages.data[0].content[0].text.value)
+            shopping_list_parsed = (json.dumps(gpt_output))
+            print(shopping_list_parsed)
+
+            return redirect(url_for('shopping'))
 
 
 if __name__ == "__main__":
