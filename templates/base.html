@@ -15,6 +15,20 @@
             background-color: #333;
             overflow: hidden;
         }
+        
+        .navbar a.brand {
+            float: left;
+        }
+
+        .navbar a.link {
+            float: right;
+        }
+        
+        .navbar.collapsed a {
+            float: none;
+            display: block;
+            text-align: left;
+        }
 
         .navbar a {
             float: left;
@@ -67,7 +81,7 @@
     <a href="#" class="icon" onclick="toggleNavbar()">
         <i class="fa fa-bars"></i>
     </a>
-    <a href="#" class="brand">{{ website_name }}</a>
+    <a href="#" class="brand">CarbonSense</a>
     <a href="#" class="link">Link 1</a>
     <a href="#" class="link">Link 2</a>
     <a href="#" class="link">Link 3</a>
