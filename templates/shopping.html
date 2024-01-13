@@ -28,7 +28,7 @@
         <button type="submit">Add to Shopping List</button>
     </form>
 
-    <h2>Shopping List</h2>
+    <h2>Your Shopping List</h2>
     <ul>
         {% for item in shopping_list %}
             <li>
@@ -39,6 +39,13 @@
                 </form>
             </li>
         {% endfor %}
+    </ul>
+
+    <h2>Shopping List from JSON Data</h2>
+    <ul>
+        <li>
+            {{ shopping_list_parsed['item'] }} - Quantity: {{ shopping_list_parsed['quantity'] }} - Carbon Emission: {{ shopping_list_parsed['total_carbon_emission_kg'] }}
+        </li>
     </ul>
 
     <a href="{{ url_for('get_json') }}">Get JSON</a>
