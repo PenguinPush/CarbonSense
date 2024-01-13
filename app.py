@@ -66,7 +66,9 @@ def transit():
 
 
     def estimate_carbon_emissions(distance, transportation_mode):
-        return distance * 0.206
+        distance_num = ''.join(char for char in distance if char.isdigit())
+        spent_carbon = int(distance_num) * 0.206
+        return round(spent_carbon, 2)
 
 
     if __name__ == "__main__":
