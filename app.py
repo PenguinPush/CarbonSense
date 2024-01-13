@@ -1,4 +1,5 @@
 from flask import Flask, url_for, render_template, redirect, request, jsonify
+import requests
 
 app = Flask(__name__)
 
@@ -39,7 +40,6 @@ def remove_item():
 
     return redirect(url_for('shopping'))
 
-
 @app.route('/get_json')
 def get_json():
     # Convert the shopping list to JSON and return it
@@ -47,11 +47,6 @@ def get_json():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-import requests
-
-import requests
-
 
 def calculate_distance_and_route(api_key, origin, destination):
     base_url = "https://maps.googleapis.com/maps/api/directions/json"
