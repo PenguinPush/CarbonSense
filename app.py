@@ -19,16 +19,25 @@ def shopping():
     if request.method == 'POST':
         item = request.form.get('item')
         quantity = int(request.form.get('quantity'))
-        weight = float(request.form.get('weight', 0))
 
         # Append the item, quantity, and weight to the shopping list
         shopping_list.append({
             'item': item,
             'quantity': quantity,
-            'weight': weight
         })
 
     return render_template('shopping.html', shopping_list=shopping_list)
+
+
+@app.route('/remove_item', methods=['POST'])
+def remove_item():
+    item_to_remove = request.form.get('item_to_remove')
+
+    # Remove the item from the shopping list
+    shopping_list[:] = [item for item in shopping_list if item['item'] != item_to_remove]
+
+    return redirect(url_for('shopping'))
+
 
 @app.route('/get_json')
 def get_json():
