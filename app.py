@@ -1,4 +1,18 @@
+import openai
 from flask import Flask, url_for, render_template, redirect, request, jsonify
+from openai import OpenAI
+
+client = OpenAI(api_key='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')
+
+# carbon_counter = client.beta.assistants.create(
+#     instructions="Treat an input of a JSON shopping list with parameters like item, quantity, and weight and return an estimate of carbon emissions in metric format for each item purchased in a JSON format with the parameters item, quantity, and carbon emissions per item. Use your knowledge to calculate it.",
+#     name="Carl the Carbon Counter",
+#     model="gpt-4",
+# )
+
+carbon_counter = client.beta.assistants.retrieve(assistant_id='asst_5f1AdNw2sy4HOQwCufkdZqtH')
+
+print(carbon_counter)
 
 app = Flask(__name__)
 
