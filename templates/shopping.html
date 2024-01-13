@@ -1,9 +1,10 @@
+<!-- shopping.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carbon Sense | Shopping Tracker</title>
+    <title>Shopping Tracker</title>
 </head>
 <body>
     <h1>Shopping Tracker</h1>
@@ -14,13 +15,20 @@
         <label for="quantity">Quantity:</label>
         <input type="number" id="quantity" name="quantity" min="1" required>
 
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" name="weight" step="0.01" min="0" required>
+
         <button type="submit">Add to Shopping List</button>
     </form>
 
     <h2>Shopping List</h2>
     <ul>
         {% for item in shopping_list %}
-            <li>{{ item['item'] }} - Quantity: {{ item['quantity'] }}</li>
+            <li>
+                {{ item['item'] }} -
+                Quantity: {{ item['quantity'] }} -
+                Weight: {{ item['weight'] }} kg
+            </li>
         {% endfor %}
     </ul>
 
