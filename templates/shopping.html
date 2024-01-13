@@ -41,16 +41,22 @@
         {% endfor %}
     </ul>
 
-    <h2>Shopping List from JSON Data</h2>
-    <ul>
-        <li>
-            {{ shopping_list_parsed['item'] }} - Quantity: {{ shopping_list_parsed['quantity'] }} - Carbon Emission: {{ shopping_list_parsed['total_carbon_emission_kg'] }}
-        </li>
-    </ul>
+    <h2>Parsed Shopping List</h2>
+        {% if shopping_list_parsed %}
+            <ul>
+                {% for item in shopping_list_parsed %}
+                    <li>
+                        {{ item['item'] }} - Quantity: {{ item['quantity']}} - Carbon Cost: {{ item['total_carbon_emission_kg'] }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No parsed items available.</p>
+        {% endif %}
 
-    <a href="{{ url_for('get_json') }}">Get JSON</a>
+        <a href="{{ url_for('get_json') }}">Get JSON</a>
 
-    {% endblock %}
+        {% endblock %}
 
 </body>
 </html>

@@ -18,7 +18,9 @@ thread = client.beta.threads.create()
 app = Flask(__name__)
 app.secret_key = secrets.token_urlsafe(16)
 
+
 shopping_list = []
+shopping_list_parsed = []
 
 
 @app.route("/")
@@ -99,16 +101,13 @@ def transit():
 
 @app.route('/shopping', methods=['GET', 'POST'])
 def shopping():
-    if 'shopping_list_parsed' in session:
-        shopping_list_parsed = session['shopping_list_parsed']
-    else:
-        shopping_list_parsed = []
+    shopping_list_parsed = session.get('shopping_list_parsed', [])
 
     if request.method == 'POST':
+        # Process the shopping list as usual
         item = request.form.get('item')
         quantity = int(request.form.get('quantity'))
 
-        # Append the item, quantity, and weight to the shopping list
         shopping_list.append({
             'item': item,
             'quantity': quantity,
@@ -151,22 +150,13 @@ def get_json():
             )
 
             shopping_list_parsed = str(messages.data[0].content[0].text.value)
-
-            print(shopping_list_parsed)
-            print(json.loads(shopping_list_parsed))
-
-            # Separate dictionaries and string
-            dictionaries = [item for item in shopping_list_parsed if isinstance(item, dict)]
-            string_element = next((item for item in shopping_list_parsed if isinstance(item, str)), None)
-
-            # Print the Python-friendly representation
-            print(dictionaries)
-            print(string_element)
+            shopping_list_parsed = json.loads(shopping_list_parsed)
 
             session['shopping_list_parsed'] = shopping_list_parsed
 
-            return redirect(url_for('shopping'))
+            print(shopping_list_parsed)
 
+            return redirect('/shopping')
 
 if __name__ == "__main__":
     app.run(debug=True)
