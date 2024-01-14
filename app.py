@@ -57,7 +57,7 @@ def get_json():
 
             session['shopping_list_parsed'] = shopping_list_parsed
 
-            history.extend(shopping_list_parsed)
+            history.insert(0, shopping_list_parsed)
 
             print(shopping_list_parsed)
 
