@@ -18,10 +18,15 @@
         <div>
             <form method="post" action="/shopping">
                 <div class="carbon_input">
-                    <input class = "input" type="text" id="item" name="item" placeholder = "item" required>
-                    <input class = "input" type="number" id="quantity" name="quantity" min="1" placeholder="quantity" required>
+                    <input class = "input" type="text" id="item" name="item" placeholder = " item" required>
+                </div>
+                <div class="carbon_input">
+                    <input class = "input" type="number" id="quantity" name="quantity" min="1" placeholder=" quantity" required>
+                </div>
+                <div class="carbon_button">
                     <button type="submit">Add to Shopping List</button>
                 </div>
+                
             </form>
         </div>
     <h2>Your Shopping List</h2>
@@ -54,9 +59,24 @@
 
         <div class="icon_navbar">
             <div class="icons">
-                <object id="shopping_cart" data="{{url_for('static', filename='shopping-cart.svg')}}" width="50" height="50"></object>
-                <object id="home" data="{{url_for('static', filename='home.svg')}}" width="50" height="50"></object>
-                <object id="bus" data="{{url_for('static', filename='bus.svg')}}" width="50" height="50"></object>
+                <div id="shopping_cart">
+                    <object data="{{url_for('static', filename='shopping-cart.svg')}}" width="50" height="50" ></object>
+                    <div class="overlay">
+                        <a href="/shopping">m</a>
+                    </div>
+                </div>
+                <div id="home">
+                    <object data="{{url_for('static', filename='home.svg')}}" width="50" height="50"></object>
+                    <div class="overlay">
+                        <a href="/">m</a>
+                    </div>
+                </div>
+                <div id="bus">
+                    <object data="{{url_for('static', filename='bus.svg')}}" width="50" height="50"></object>
+                    <div class="overlay">
+                        <a href="/transit">m</a>
+                    </div>
+                </div>
             </div>
         </div>
 
