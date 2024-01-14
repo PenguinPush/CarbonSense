@@ -2,6 +2,7 @@ from flask import Flask, url_for, render_template, redirect, request, session
 from openai import OpenAI
 import json
 import secrets
+
 client = OpenAI(api_key='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')
 
 # carbon_counter = client.beta.assistants.create(
@@ -17,10 +18,18 @@ app = Flask(__name__)
 app.secret_key = secrets.token_urlsafe(16)
 
 history = [
-    {'item': 'Industrial Revolution', 'quantity': 1, 'individual_carbon_emissions_kg': 200000000000, 'total_carbon_emissions_kg': 200000000000, 'trivia': 'The carbon emissions during the Industrial Revolution paved the way for the modern anthropogenic climate change.'},
-    {'item': 'Taylor Swift Concert', 'quantity': 1, 'individual_carbon_emissions_kg': 27500, 'total_carbon_emissions_kg': 27500, 'trivia': 'The carbon emissions from a Taylor Swift Concert equates to flying a plane around the world over 5 times!'},
-    {'item': 'Water Bottles', 'quantity': 24, 'individual_carbon_emissions_kg': 0.082, 'total_carbon_emissions_kg': 1.968, 'trivia': 'The carbon emissions from producing 24 water bottles could fill nearly 237 basketballs!'},
-    {'item': 'Charging Smartphone', 'quantity': 1, 'individual_carbon_emissions_kg': 0.005, 'total_carbon_emissions_kg': 0.005, 'trivia': 'Did you know? The carbon emissions from charging a smartphone are equivalent to driving a regular car for about 15 meters.'},
+    {'item': 'Industrial Revolution', 'quantity': 1, 'individual_carbon_emissions_kg': 200000000000,
+     'total_carbon_emissions_kg': 200000000000,
+     'trivia': 'The carbon emissions during the Industrial Revolution paved the way for the modern anthropogenic climate change.'},
+    {'item': 'Taylor Swift Concert', 'quantity': 1, 'individual_carbon_emissions_kg': 27500,
+     'total_carbon_emissions_kg': 27500,
+     'trivia': 'The carbon emissions from a Taylor Swift Concert equates to flying a plane around the world over 5 times!'},
+    {'item': 'Water Bottles', 'quantity': 24, 'individual_carbon_emissions_kg': 0.082,
+     'total_carbon_emissions_kg': 1.968,
+     'trivia': 'The carbon emissions from producing 24 water bottles could fill nearly 237 basketballs!'},
+    {'item': 'Charging Smartphone', 'quantity': 1, 'individual_carbon_emissions_kg': 0.005,
+     'total_carbon_emissions_kg': 0.005,
+     'trivia': 'Did you know? The carbon emissions from charging a smartphone are equivalent to driving a regular car for about 15 meters.'},
     {'item': 'Pizza Slice', 'quantity': 5, 'individual_carbon_emissions_kg': 0.36, 'total_carbon_emissions_kg': 1.8,
      'trivia': 'Fun fact, the total carbon emissions of 5 pizza slices is roughly the same as charging 363 smartphones!'}
 ]
@@ -71,13 +80,20 @@ def get_json():
 
             return redirect('/')
 
+
 @app.route('/game')
 def game():
     return render_template('game.html')
 
+
 @app.route('/transit')
 def transit():
-    return render_template('transit.html')
+    return render_template('transit.html') 
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True)
