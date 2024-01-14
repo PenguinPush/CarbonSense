@@ -4,6 +4,8 @@ body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
     overflow: visible;
+    margin: auto;
+    width: 50%;
 }
 
 .navbar {
