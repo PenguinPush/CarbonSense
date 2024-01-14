@@ -7,7 +7,9 @@
     <title>Carbon Sense | Shopping Tracker</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
-        font-family: 'Poppins', sans-serif;
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
     </style>
 </head>
 <body>
@@ -16,6 +18,9 @@
     {% block title %}:3 :3 :3 :3{% endblock %}
 
     {% block content %}
+
+    <!-- Display total carbon emissions at the top -->
+    <h2>Total Carbon Emissions: {{ total_carbon_emissions }} kg</h2>
 
     <h1>Shopping Tracker</h1>
     <form method="post" action="/shopping">
@@ -27,6 +32,8 @@
 
         <button type="submit">Add to Shopping List</button>
     </form>
+
+    <!-- ... (rest of your HTML code) -->
 
     <h2>Your Shopping List</h2>
     <ul>
@@ -42,21 +49,21 @@
     </ul>
 
     <h2>Parsed Shopping List</h2>
-        {% if shopping_list_parsed %}
-            <ul>
-                {% for item in shopping_list_parsed %}
-                    <li>
-                        {{ item['item'] }} - Quantity: {{ item['quantity']}} - Carbon Cost: {{ item['total_carbon_emission_kg'] }}
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No parsed items available.</p>
-        {% endif %}
+    {% if shopping_list_parsed %}
+        <ul>
+            {% for item in shopping_list_parsed %}
+                <li>
+                    {{ item['item'] }} - Quantity: {{ item['quantity']}} - Carbon Cost: {{ item['total_carbon_emission_kg'] }} kg
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No parsed items available.</p>
+    {% endif %}
 
-        <a href="{{ url_for('get_json') }}">Get JSON</a>
+    <a href="{{ url_for('get_json') }}">Get JSON</a>
 
-        {% endblock %}
+    {% endblock %}
 
 </body>
 </html>

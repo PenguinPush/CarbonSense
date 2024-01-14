@@ -102,6 +102,7 @@ def transit():
 @app.route('/shopping', methods=['GET', 'POST'])
 def shopping():
     shopping_list_parsed = session.get('shopping_list_parsed', [])
+    total_carbon_emissions = sum(item.get('total_carbon_emission_kg', 0) for item in shopping_list_parsed)
 
     if request.method == 'POST':
         # Process the shopping list as usual
@@ -113,7 +114,11 @@ def shopping():
             'quantity': quantity,
         })
 
-    return render_template('shopping.html', shopping_list=shopping_list, shopping_list_parsed=shopping_list_parsed)
+    return render_template('shopping.html',
+                           shopping_list=shopping_list,
+                           shopping_list_parsed=shopping_list_parsed,
+                           total_carbon_emissions=total_carbon_emissions
+                           )
 
 
 @app.route('/remove_item', methods=['POST'])
