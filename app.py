@@ -187,11 +187,6 @@ def generate_game():
 
 @app.route('/game', methods=['GET', 'POST'])
 def game():
-<<<<<<< Updated upstream
-    return render_template('game.html')
-
-
-=======
     global answer
     result = None
     obj_one, num_obj_one, obj_two, num_obj_two, total_one, total_two, answer = generate_game()
@@ -209,7 +204,6 @@ def game():
         else:
              result = "Wrong"
     return render_template('game.html', object_one=obj_one, amt_of_one=num_obj_one, object_two=obj_two, amt_of_two=num_obj_two, total_one=total_one, total_two=total_two, result=result)
->>>>>>> Stashed changes
 
 @app.route('/about')
 def about():
