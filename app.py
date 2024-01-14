@@ -88,18 +88,6 @@ def transit():
         #origin_location = input("Enter the origin location: ")
         #destination_location = input("Enter the destination location: ")
 
-"""
-        distance, route = calculate_distance_and_route(google_maps_api_key, origin_location, destination_location)
-        if distance and route:
-            decoded_route = polyline.decode(route)
-            print(f"Distance: {distance}")
-            print(f"Route: {decoded_route}")
-
-
-            # Estimate carbon emissions (replace with your chosen carbon estimation logic)
-            carbon_emission_estimate = estimate_carbon_emissions(distance, transportation_mode='driving')
-            print(f"Carbon Emission Estimate: {carbon_emission_estimate} kgCO2")
-"""
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -109,6 +97,7 @@ def index():
         return redirect('/get_json')
 
     return render_template('index.html', history=history)
+
 
 @app.route('/get_json')
 def get_json():
@@ -187,12 +176,6 @@ def generate_game():
 
 @app.route('/game', methods=['GET', 'POST'])
 def game():
-<<<<<<< Updated upstream
-    return render_template('game.html')
-
-
-=======
-    global answer
     result = None
     obj_one, num_obj_one, obj_two, num_obj_two, total_one, total_two, answer = generate_game()
     if request.method == 'POST':
@@ -209,7 +192,6 @@ def game():
         else:
              result = "Wrong"
     return render_template('game.html', object_one=obj_one, amt_of_one=num_obj_one, object_two=obj_two, amt_of_two=num_obj_two, total_one=total_one, total_two=total_two, result=result)
->>>>>>> Stashed changes
 
 @app.route('/about')
 def about():
