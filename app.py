@@ -1,9 +1,7 @@
 from flask import Flask, url_for, render_template, redirect, request, session
 from openai import OpenAI
-import requests
 import json
 import secrets
-import polyline
 client = OpenAI(api_key='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')
 
 # carbon_counter = client.beta.assistants.create(
@@ -25,87 +23,12 @@ shopping_list_parsed = []
 
 @app.route("/")
 def home():
-    return redirect(url_for('shopping'))
+    return render_template('index.html')
 
 
 @app.route('/transit')
 def transit():
-    # def calculate_distance_and_route(api_key, origin, destination):
-    #     base_url = "https://maps.googleapis.com/maps/api/directions/json"
-    #     params = {
-    #         'origin': origin,
-    #         'destination': destination,
-    #         'key': api_key,
-    #     }
-
-    #     response = requests.get(base_url, params=params)
-    #     data = response.json()
-
-    #     if data['status'] == 'OK':
-    #         # Extract distance and route information
-    #         distance = data['routes'][0]['legs'][0]['distance']['text']
-    #         route = data['routes'][0]['overview_polyline']['points']
-    #         return distance, route
-    #     else:
-    #         return None, None
-    # def suggest_alternate_route(api_key, origin, destination):
-    #     base_url = "https://maps.googleapis.com/maps/api/directions/json"
-    #     params = {
-    #         'origin': origin,
-    #         'destination': destination,
-    #         'mode': 'transit',
-    #         'key': api_key,
-    #     }
-
-    #     response = requests.get(base_url, params=params)
-    #     data = response.json()
-
-    #     if data['status'] == 'OK':
-    #         # Extract alternate route information
-    #         transit_route = data['routes'][0]['overview_polyline']['points']
-    #         return transit_route
-    #     else:
-    #         return None
-
-
-    # def estimate_carbon_emissions(distance, transportation_mode):
-    #     distance_num = ''.join(char for char in distance if char.isdigit())
-    #     spent_carbon = int(distance_num) * 0.206
-    #     return round(spent_carbon, 2)
-
-
-    # if __name__ == "__main__":
-    #     google_maps_api_key = 'AIzaSyCMPdLpbgwvxDXT02Fwk8mqHfNPqop6rxk'
-
-    #     # Get user input for origin and destination
-    #     origin_location = input("Enter the origin location: ")
-    #     destination_location = input("Enter the destination location: ")
-
-    #     distance, route = calculate_distance_and_route(google_maps_api_key, origin_location, destination_location)
-    #     if distance and route:
-    #         decoded_route = polyline.decode(route)
-    #         print(f"Distance: {distance}")
-    #         print(f"Route: {decoded_route}")
-
-
-    #         # Estimate carbon emissions (replace with your chosen carbon estimation logic)
-    #         carbon_emission_estimate = estimate_carbon_emissions(distance, transportation_mode='driving')
-    #         print(f"Carbon Emission Estimate: {carbon_emission_estimate} kgCO2")
-
-    #         # Suggest alternate route with transit
-    #         transit_route = suggest_alternate_route(google_maps_api_key, origin_location, destination_location)
-    #         if transit_route:
-    #             decoded_transit_route = polyline.decode(transit_route)
-    #             print(f"Suggested Transit Route: {decoded_transit_route}")
-    #     else:
-    #         print("Error in route calculation.")
-    # return render_template('transit.html', distance=distance, decoded_route=decoded_route, carbon_emission_estimate=carbon_emission_estimate, transit_route=decoded_transit_route)
-
     return render_template('transit.html')
-    # response = app.make_response(content)
-    # response.headers['X-Frame-Options'] = 'ALLOW-FROM https://www.google.com'
-    
-    # return response
 
 
 
