@@ -191,9 +191,9 @@ def game():
         print(answerTwo)
         if answerOne is not None and answer == True:
             result = "Correct"
-        if answerTwo is not None and answer == False:
+        elif answerTwo is not None and answer == False:
             result = "Correct"
-        if answerOne is not None and answer == False:
+        elif answerOne is not None and answer == False:
             result = "Wrong"
         else:
             result = "Wrong"
