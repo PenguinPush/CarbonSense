@@ -10,7 +10,6 @@
     </style>
 </head>
 <body>
-    {% extends 'base.html' %}
     {% block content %}
     <h1>Route Estimation - Result</h1>
     <p>Distance: {{ distance }}</p>
@@ -19,4 +18,12 @@
     <p>Suggested Transit Route: {{ transit_route }}</p>
     {% endblock %}
 </body>
+<iframe
+  width="450"
+  height="250"
+  frameborder="0" style="border:0"
+  referrerpolicy="no-referrer-when-downgrade"
+  src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCMPdLpbgwvxDXT02Fwk8mqHfNPqop6rxk&origin=Oslo+Norway&destination=Telemark+Norway&avoid=tolls|highways"
+  >  
+</iframe>
 </html>
