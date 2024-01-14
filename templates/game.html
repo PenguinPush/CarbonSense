@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carbon Sense | Game </title>
+        <link rel="icon" type="image/x-icon" href="/static/ventis.jpg">
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 </head>
 <body>
@@ -13,17 +14,17 @@
         <div class="empty">
 
         </div>
-        <h2>Guess which item produces more carbon emissions!</h2>
-        <div>
+        <h2 class="center">Guess which item produces more carbon emissions!</h2>
+        <div class="game_ui">
             <div class="game_buttons">
-                <form action="" method="post">
+                <form action="" method="post" class = "game_buttons">
                     <input class="input_button" type="submit" name="one" value="{{amt_of_one}}x {{object_one}}"/>
                     <input class="input_button" type="submit" name="two" value="{{amt_of_two}}x {{object_two}}"/>
                 </form>
-            </div classs="game_buttons">
+            </div>
         </div>
         <div>
-            <h2>{{result}}!</h2>
+            <h2 class = "center">{{result}}!</h2>
         </div>
     {% endblock %}
 </body>
