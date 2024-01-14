@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carbon Sense | Shopping Tracker</title>
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <script type="text/javascript" src="{{url_for('static', filename='script.js')}}"></script>
 </head>
 <body>
 
@@ -16,10 +17,11 @@
     <h2>Total Carbon Emissions: {{ total_carbon_emissions }} kg</h2>
         <div>
             <form method="post" action="/shopping">
-                <input class = input type="text" id="item" name="item" placeholder = "item" required>
-                <input class = input type="number" id="quantity" name="quantity" min="1" placeholder="quantity" required>
-
-                <button type="submit">Add to Shopping List</button>
+                <div class="carbon_input">
+                    <input class = "input" type="text" id="item" name="item" placeholder = "item" required>
+                    <input class = "input" type="number" id="quantity" name="quantity" min="1" placeholder="quantity" required>
+                    <button type="submit">Add to Shopping List</button>
+                </div>
             </form>
         </div>
     <h2>Your Shopping List</h2>
@@ -52,14 +54,11 @@
 
         <div class="icon_navbar">
             <div class="icons">
-                <object data="{{url_for('static', filename='shopping-cart.svg')}}" width="50" height="50"></object>
-                <object data="{{url_for('static', filename='lightbulb.svg')}}" width="50" height="50"></object>
-                <object data="{{url_for('static', filename='bus.svg')}}" width="50" height="50"></object>
+                <object id="shopping_cart" data="{{url_for('static', filename='shopping-cart.svg')}}" width="50" height="50"></object>
+                <object id="home" data="{{url_for('static', filename='home.svg')}}" width="50" height="50"></object>
+                <object id="bus" data="{{url_for('static', filename='bus.svg')}}" width="50" height="50"></object>
             </div>
         </div>
-
-
-        
 
         </div>
         {% endblock %}
