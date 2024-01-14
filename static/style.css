@@ -104,7 +104,10 @@ h2{
 .history{
     border-radius: 30px;
     border: 1px solid;
-    margin: auto;
+    border-color: #f2f7ff;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    background: #f2f7ff;
     width: 80%;
     text-align:center;
 }
