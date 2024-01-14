@@ -3,82 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Your Website{% endblock %}</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
-
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .navbar {
-            background-color: #333;
-            color: white;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo img {
-            max-width: 100px;
-            max-height: 50px;
-            margin-right: 10px;
-        }
-
-        .links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .links a {
-            color: white;
-            text-decoration: none;
-            font-weight: normal;
-        }
-
-        a:hover{
-            color: grey;
-        }
-
-        .icons{
-            display: none;
-        }
-
-        @media screen and (max-width: 650px) {
-            .navbar {
-                flex-direction: column;
-                align-items: center;
-                bottom: 0;
-                left: 0;
-                position:fixed;
-                width: 100%;
-            }
-
-            .links {
-                display: none;
-            }
-            .logo{
-                display: none;
-            }
-            .icons{
-                display: flex;
-                flex-direction: row;
-                margin: 0 auto;
-                padding: 0;
-                justify-content: space-between;
-                align-items: flex-end;
-                bottom: 0;
-                width: 650;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 </head>
 
 <body>
@@ -108,19 +33,6 @@
         </div>
     </div>
 -->
-
-<div class="icons">
-    <a href="/">
-        <object data="{{url_for('static', filename='shopping-cart.svg')}}" width="100" height="100"></object>
-    </a>
-    <a href="#">
-        <object data="{{url_for('static', filename='lightbulb.svg')}}" width="100" height="100"></object>
-    </a>
-    <a href="#">
-        <object data="{{url_for('static', filename='bus.svg')}}" width="100" height="100"></object>
-    </a>
-
-</div>
 
 {% block content %}{% endblock %}
 
