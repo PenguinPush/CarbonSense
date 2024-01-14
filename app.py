@@ -164,4 +164,4 @@ def get_json():
             return redirect('/shopping')
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
