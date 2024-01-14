@@ -1,33 +1,25 @@
-<!-- shopping.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carbon Sense | Shopping Tracker</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
-        font-family: 'Poppins', sans-serif;
-    </style>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 </head>
 <body>
+
     {% extends 'base.html' %}
 
-    {% block title %}:3 :3 :3 :3{% endblock %}
-
     {% block content %}
+    <div class="shopping_body">
+        <div>
+            <form method="post" action="/shopping">
+                <input type="text" id="item" name="item" placeholder = "item" required>
+                <input type="number" id="quantity" name="quantity" min="1" placeholder="quantity" required>
 
-    <h1>Shopping Tracker</h1>
-    <form method="post" action="/shopping">
-        <label for="item">Item:</label>
-        <input type="text" id="item" name="item" required>
-
-        <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" name="quantity" min="1" required>
-
-        <button type="submit">Add to Shopping List</button>
-    </form>
-
+                <button type="submit">Add to Shopping List</button>
+            </form>
+        </div>
     <h2>Your Shopping List</h2>
     <ul>
         {% for item in shopping_list %}
@@ -56,7 +48,20 @@
 
         <a href="{{ url_for('get_json') }}">Get JSON</a>
 
+        <div class="icon_navbar">
+            <div class="icons">
+                <object data="{{url_for('static', filename='shopping-cart.svg')}}" width="50" height="50"></object>
+                <object data="{{url_for('static', filename='lightbulb.svg')}}" width="50" height="50"></object>
+                <object data="{{url_for('static', filename='bus.svg')}}" width="50" height="50"></object>
+            </div>
+        </div>
+
+
+        
+
+        </div>
         {% endblock %}
+    
 
 </body>
 </html>
