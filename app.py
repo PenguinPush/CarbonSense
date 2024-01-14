@@ -16,59 +16,24 @@ thread = client.beta.threads.create()
 app = Flask(__name__)
 app.secret_key = secrets.token_urlsafe(16)
 
+history = []
 
-shopping_list = []
-shopping_list_parsed = []
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        global item
+        item = request.form.get('item')
+        return redirect('/get_json')
 
-
-@app.route("/")
-def home():
     return render_template('index.html')
 
-
-@app.route('/transit')
-def transit():
-    return render_template('transit.html')
-
-
-
-@app.route('/shopping', methods=['GET', 'POST'])
-def shopping():
-    shopping_list_parsed = session.get('shopping_list_parsed', [])
-    total_carbon_emissions = sum(item.get('total_carbon_emission_kg', 0) for item in shopping_list_parsed)
-
-    if request.method == 'POST':
-        # Process the shopping list as usual
-        item = request.form.get('item')
-        quantity = int(request.form.get('quantity'))
-
-        shopping_list.append({
-            'item': item,
-            'quantity': quantity,
-        })
-
-    return render_template('shopping.html',
-                           shopping_list=shopping_list,
-                           shopping_list_parsed=shopping_list_parsed,
-                           total_carbon_emissions=total_carbon_emissions
-                           )
-
-
-@app.route('/remove_item', methods=['POST'])
-def remove_item():
-    item_to_remove = request.form.get('item_to_remove')
-
-    # Remove the item from the shopping list
-    shopping_list[:] = [item for item in shopping_list if item['item'] != item_to_remove]
-
-    return redirect(url_for('shopping'))
 
 @app.route('/get_json')
 def get_json():
     message = client.beta.threads.messages.create(
         thread_id=thread.id,
         role="user",
-        content=json.dumps(shopping_list)
+        content=item
     )
 
     run = client.beta.threads.runs.create(
@@ -94,7 +59,7 @@ def get_json():
 
             print(shopping_list_parsed)
 
-            return redirect('/shopping')
+            return redirect('/')
 
 if __name__ == "__main__":
     app.run(debug=True)
