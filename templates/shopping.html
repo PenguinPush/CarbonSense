@@ -21,18 +21,14 @@
                     <div class="carbon_input">
                         <input class = "input" type="text" id="item" name="item" placeholder = " Item" required>
                     </div>
-                    <div class="carbon_input">
-                        <input class = "input" type="number" id="quantity" name="quantity" min="1" placeholder=" Quantity" required>    
-                    </div>
                     <div class="carbon_button">
-                        <button type="submit">Add to Shopping List</button>
+                        <a href="{{url_for('get_json')}}"></a>
+                            <button class="enter" type="submit">⏎</button>
+                        </a>
                     </div>
                 </div>
             </form>
             <div>
-                <a href="{{url_for('get_json')}}">
-                    <button id="calculate">Calculate Emissions</button>
-                </a>
             </div>
         </div>
     <h2>Your Shopping List</h2>
