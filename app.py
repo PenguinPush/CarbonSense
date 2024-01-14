@@ -3,7 +3,7 @@ from openai import OpenAI
 import requests
 import json
 import secrets
-
+import polyline
 client = OpenAI(api_key='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')
 
 # carbon_counter = client.beta.assistants.create(
@@ -83,8 +83,10 @@ def transit():
 
         distance, route = calculate_distance_and_route(google_maps_api_key, origin_location, destination_location)
         if distance and route:
+            decoded_route = polyline.decode(route)
             print(f"Distance: {distance}")
-            print(f"Route: {route}")
+            print(f"Route: {decoded_route}")
+
 
             # Estimate carbon emissions (replace with your chosen carbon estimation logic)
             carbon_emission_estimate = estimate_carbon_emissions(distance, transportation_mode='driving')
@@ -93,10 +95,11 @@ def transit():
             # Suggest alternate route with transit
             transit_route = suggest_alternate_route(google_maps_api_key, origin_location, destination_location)
             if transit_route:
-                print(f"Suggested Transit Route: {transit_route}")
+                decoded_transit_route = polyline.decode(transit_route)
+                print(f"Suggested Transit Route: {decoded_transit_route}")
         else:
             print("Error in route calculation.")
-    return render_template('transit.html', distance=distance, decoded_route="wtf is a decoded route", carbon_emission_estimate=carbon_emission_estimate, transit_route=transit_route)
+    return render_template('transit.html', distance=distance, decoded_route=decoded_route, carbon_emission_estimate=carbon_emission_estimate, transit_route=decoded_transit_route)
 
 
 @app.route('/shopping', methods=['GET', 'POST'])
