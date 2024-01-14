@@ -28,7 +28,7 @@
             <div class = "history">
                 <p>
                     <b>{{ item['item'] }}</b> x{{ item['quantity'] }}<br>
-                    Carbon Cost: {{ item['total_carbon_emissions_kg'] }} kg - ({{ item['individual_carbon_emissions_kg'] }} kg per)<br>
+                    Carbon Cost: {{ '{:,.2f}'.format(item['total_carbon_emissions_kg']) }} kg - ({{ '{:,.2f}'.format(item['individual_carbon_emissions_kg']) }} kg per)<br>
                     Trivia: {{ item['trivia'] }}<br>
                 </p>
             </div>
