@@ -34,19 +34,19 @@
     </ul>
 
     <h2>Parsed Shopping List</h2>
-        {% if shopping_list_parsed %}
-            <ul>
-                {% for item in shopping_list_parsed %}
-                    <li>
-                        {{ item['item'] }} - Quantity: {{ item['quantity']}} - Carbon Cost: {{ item['total_carbon_emission_kg'] }}
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No parsed items available.</p>
-        {% endif %}
+    {% if shopping_list_parsed %}
+        <ul>
+            {% for item in shopping_list_parsed %}
+                <li>
+                    {{ item['item'] }} - Quantity: {{ item['quantity']}} - Carbon Cost: {{ item['total_carbon_emission_kg'] }} kg
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No parsed items available.</p>
+    {% endif %}
 
-        <a href="{{ url_for('get_json') }}">Get JSON</a>
+    <a href="{{ url_for('get_json') }}">Get JSON</a>
 
         <div class="icon_navbar">
             <div class="icons">
@@ -61,7 +61,6 @@
 
         </div>
         {% endblock %}
-    
 
 </body>
 </html>
