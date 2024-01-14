@@ -15,17 +15,24 @@
     
     <div class="shopping_body">
     <h2>Total Carbon Emissions: {{ total_carbon_emissions }} kg</h2>
-        <div>
+        <div class="carbon_calculator">
             <form method="post" action="/shopping">
-                <div class="carbon_input">
-                    <input class = "input" type="text" id="item" name="item" placeholder = " item" required>
-                    <input class = "input" type="number" id="quantity" name="quantity" min="1" placeholder=" quantity" required>    
+                <div>
+                    <div class="carbon_input">
+                        <input class = "input" type="text" id="item" name="item" placeholder = " Item" required>
+                    </div>
+                    <div class="carbon_input">
+                        <input class = "input" type="number" id="quantity" name="quantity" min="1" placeholder=" Quantity" required>    
+                    </div>
+                    <div class="carbon_button">
+                        <button type="submit">Add to Shopping List</button>
+                    </div>
                 </div>
-                <div class="carbon_button">
-                    <button type="submit">Add to Shopping List</button>
-                </div>
-                
             </form>
+            <div>
+                    <button id="calculate">Calculate Emissions</button>
+                </a>
+            </div>
         </div>
     <h2>Your Shopping List</h2>
     <ul>
@@ -34,7 +41,10 @@
                 {{ item['item'] }} - Quantity: {{ item['quantity'] }}
                 <form method="post" action="/remove_item">
                     <input type="hidden" name="item_to_remove" value="{{ item['item'] }}">
-                    <button type="submit">Remove</button>
+                    <a href="{{url_for('get_json')}}">
+                        <button type="submit">Remove</button>
+                    </a>
+            
                 </form>
             </li>
         {% endfor %}
@@ -53,7 +63,7 @@
         <p>No parsed items available.</p>
     {% endif %}
 
-    <a href="{{ url_for('get_json') }}">Get JSON</a>
+    <a href="{{url_for('get_json')}}">Get JSON</a>
 
         <div class="icon_navbar">
             <div class="icons">
