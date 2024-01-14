@@ -14,7 +14,6 @@
     {% block content %}
 
     <div class="shopping_body">
-    <h2>Total Carbon Emissions: {{ total_carbon_emissions }} kg</h2>
         <div class="carbon_calculator">
             <form method="post" action="/">
                 <div>
@@ -27,61 +26,16 @@
                 </div>
             </form>
         </div>
-    <h2>Your Shopping List</h2>
     <ul>
-        {% for item in shopping_list %}
-            <li>
-                {{ item['item'] }} - Quantity: {{ item['quantity'] }}
-                <form method="post" action="/remove_item">
-                    <input type="hidden" name="item_to_remove" value="{{ item['item'] }}">
-                    <a href="{{url_for('get_json')}}">
-                        <button type="submit">Remove</button>
-                    </a>
-
-                </form>
-            </li>
+        {% for item in history %}
+            <p>
+                {{ item['item'] }} - Quantity: {{ item['quantity'] }}<br>
+                Carbon Cost: {{ item['total_carbon_emissions_kg'] }} kg - ({{ item['individual_carbon_emissions_kg'] }} kg per)<br>
+                Trivia: {{ item['trivia'] }}<br>
+            </p>
         {% endfor %}
     </ul>
-
-    <h2>Parsed Shopping List</h2>
-    {% if shopping_list_parsed %}
-        <ul>
-            {% for item in shopping_list_parsed %}
-                <li>
-                    {{ item['item'] }} - Quantity: {{ item['quantity']}} - Carbon Cost: {{ item['total_carbon_emission_kg'] }} kg
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No parsed items available.</p>
-    {% endif %}
-
-    <a href="{{url_for('get_json')}}">Get JSON</a>
-
-        <div class="icon_navbar">
-            <div class="icons">
-                <div id="shopping_cart">
-                    <object data="{{url_for('static', filename='shopping-cart.svg')}}" width="50" height="50" ></object>
-                    <div class="overlay">
-                        <a href="/shopping">m</a>
-                    </div>
-                </div>
-                <div id="home">
-                    <object data="{{url_for('static', filename='home.svg')}}" width="50" height="50"></object>
-                    <div class="overlay">
-                        <a href="/">m</a>
-                    </div>
-                </div>
-                <div id="bus">
-                    <object data="{{url_for('static', filename='bus.svg')}}" width="50" height="50"></object>
-                    <div class="overlay">
-                        <a href="/transit">m</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        </div>
+    </div>
     {% endblock %}
 
 </body>

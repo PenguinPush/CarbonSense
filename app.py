@@ -25,7 +25,7 @@ def index():
         item = request.form.get('item')
         return redirect('/get_json')
 
-    return render_template('index.html')
+    return render_template('index.html', history=history)
 
 
 @app.route('/get_json')
@@ -56,6 +56,8 @@ def get_json():
             shopping_list_parsed = json.loads(shopping_list_parsed)
 
             session['shopping_list_parsed'] = shopping_list_parsed
+
+            history.extend(shopping_list_parsed)
 
             print(shopping_list_parsed)
 
