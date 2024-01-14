@@ -3,6 +3,7 @@ import requests
 from openai import OpenAI
 import json
 import secrets
+import random
 client = OpenAI(api_key='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')
 google_maps_api_key = 'AIzaSyCMPdLpbgwvxDXT02Fwk8mqHfNPqop6rxk'
 
@@ -100,7 +101,6 @@ def index():
         return redirect('/get_json')
 
     return render_template('index.html', history=history)
-
 
 @app.route('/get_json')
 def get_json():
