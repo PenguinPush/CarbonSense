@@ -80,10 +80,9 @@ def transit():
          return redirect('/calculate')
 
     try:
-        info = f"Distance on road: {distance}\n {transit_emissions} kg of CO2!" 
+        return render_template('transit.html', distance=distance, transit_emissions=transit_emissions)
     except:
-        info = ""
-    return render_template('transit.html', info=info)
+        return render_template('transit.html')
 
         #origin_location = input("Enter the origin location: ")
         #destination_location = input("Enter the destination location: ")
