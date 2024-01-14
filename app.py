@@ -145,12 +145,71 @@ def get_json():
 
             return redirect('/')
 
+percent_proximity = 0.8
+max_range = 10
 
-@app.route('/game')
+def generate_game():
+
+    percent_proximity = 0.8
+
+    list_of_objects = ["plastic water bottle(s)", "plastic bag(s)", "world domination(s)"]
+    list_of_emissions = [3, 4, 5]  # in kg 
+
+    object_one_index = random.randint(0, len(list_of_objects)-1)
+    object_two_index = random.randint(0, len(list_of_objects)-1)
+
+    amt_of_object_one = random.randint(1, max_range)
+    approx_total_object_two_emissions = None
+    # do the fancy chat gpt thing and get both object 1 and 2 emissions (should be per unit)
+    object_one_emissions = list_of_emissions[object_one_index]
+    object_two_emissions = list_of_emissions[object_two_index]
+
+    if object_two_emissions > object_one_emissions:
+        object_one_emissions, object_two_emissions = object_two_emissions, object_one_emissions
+        object_one_index, object_two_index = object_two_index, object_one_index
+
+    total_object_one_emissions = object_one_emissions * amt_of_object_one
+
+    approx_total_object_two_emissions = object_one_emissions + (random.uniform(-1, 1) * percent_proximity * object_one_emissions)
+
+    amt_of_object_two = approx_total_object_two_emissions // object_two_emissions
+    amt_of_object_two = int(amt_of_object_two)
+    if amt_of_object_two == 0:
+         amt_of_object_two == 1
+    total_object_two_emissions = amt_of_object_two * object_two_emissions
+
+    if total_object_one_emissions > total_object_two_emissions:
+        answer = "one"
+    else:
+         answer = "two"
+    
+    return [list_of_objects[object_one_index], amt_of_object_one, list_of_objects[object_two_index], amt_of_object_two, total_object_one_emissions, total_object_two_emissions, answer]
+
+@app.route('/game', methods=['GET', 'POST'])
 def game():
+<<<<<<< Updated upstream
     return render_template('game.html')
 
 
+=======
+    global answer
+    result = None
+    obj_one, num_obj_one, obj_two, num_obj_two, total_one, total_two, answer = generate_game()
+    if request.method == 'POST':
+        answerOne = request.form.get("one")
+        answerTwo = request.form.get("two")
+        print(answerOne)
+        print(answerTwo)
+        if answerOne is not None and answer=="one":
+             result = "Correct"
+        if answerTwo is not None and answer=="two":
+             result = "Correct"
+        if answerOne is not None and answer=="two":
+             result = "Wrong"
+        else:
+             result = "Wrong"
+    return render_template('game.html', object_one=obj_one, amt_of_one=num_obj_one, object_two=obj_two, amt_of_two=num_obj_two, total_one=total_one, total_two=total_two, result=result)
+>>>>>>> Stashed changes
 
 @app.route('/about')
 def about():
