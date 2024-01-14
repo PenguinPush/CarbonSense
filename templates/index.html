@@ -14,25 +14,24 @@
     {% block content %}
 
     <div class="index_body">
-        <div class="carbon_calculator">
+        <div class="empty">
+
+        </div>
             <form method="post" action="/">
-                <div>
                     <div class="carbon_input">
-                        <input class = "input" type="text" id="item" name="item" placeholder = " Item" required>
-                    </div>
-                    <div class="carbon_button">
+                        <input class = "input_box" type="text" id="item" name="item" placeholder = " Item" required>
                         <button type="submit">Search!</button>
                     </div>
-                </div>
             </form>
-        </div>
     <ul>
         {% for item in history %}
-            <p>
-                {{ item['item'] }} - Quantity: {{ item['quantity'] }}<br>
-                Carbon Cost: {{ item['total_carbon_emissions_kg'] }} kg - ({{ item['individual_carbon_emissions_kg'] }} kg per)<br>
-                Trivia: {{ item['trivia'] }}<br>
-            </p>
+            <div class = "history">
+                <p>
+                    {{ item['item'] }} - Quantity: {{ item['quantity'] }}<br>
+                    Carbon Cost: {{ item['total_carbon_emissions_kg'] }} kg - ({{ item['individual_carbon_emissions_kg'] }} kg per)<br>
+                    Trivia: {{ item['trivia'] }}<br>
+                </p>
+            </div>
         {% endfor %}
     </ul>
     </div>
