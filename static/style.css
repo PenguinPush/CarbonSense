@@ -89,11 +89,13 @@ a:hover{
 .input_box:focus {
     outline: none;
     box-shadow: 0 0 30px rgba(220, 247, 181, 0.8);
+    backdrop-filter: none; /* Remove backdrop-filter on focus to avoid issues */
 }
 
 .input_box:hover {
     transform: scale(1.03); /* Adjust the scale factor as needed */
     box-shadow: 0 0 30px rgba(220, 247, 181, 0.8);
+    backdrop-filter: blur(10px); /* Reapply backdrop-filter on hover */
 }
 
 .input_button {
@@ -171,7 +173,8 @@ h2{
     border: 1.5px solid;
     border-color: #FEF9E2;
     margin: 0 auto;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     background: rgba(254, 249, 226, 0.6); /* Semi-transparent background */
     width: 80%;
     text-align: center;
