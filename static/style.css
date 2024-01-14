@@ -4,7 +4,7 @@ body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
     overflow: visible;
-    background-color: #E9E5D0;
+    background: url('https://images.pexels.com/photos/1423600/pexels-photo-1423600.jpeg?cs=srgb&dl=pexels-johannes-plenio-1423600.jpg&fm=jpg') center/cover fixed no-repeat;
 }
 
 .navbar {
@@ -61,32 +61,62 @@ a:hover{
     padding-top: 10px;
 }
 
-.carbon_input{
+.carbon_input {
     color: #BFEEAA;
-    border-radius:10px;
+    border-radius: 10px;
     padding: 12px 24px;
     display: flex;
     justify-content: center;
-    text-align:center;
+    text-align: center;
+    color: black;
 }
 
-.input_box{
+.input_box {
     border-radius: 10px;
     font-size: 20px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    background-color: #9AB98D;
-    color:BLACK;
-    
+    background-color: rgba(154, 185, 141, 0.6); /* Semi-transparent background */
+    color: black;
     border: none;
     padding: 12px 24px;
+    margin-right: 5px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    backdrop-filter: blur(10px); /* Adjust the blur value for the frosted effect */
 }
 
-.input_button{
-    font-size:30px;
-    background-color:#B3DAA2;
+.input_box:focus {
+    outline: none;
+    box-shadow: 0 0 30px rgba(220, 247, 181, 0.8);
 }
+
+.input_box:hover {
+    transform: scale(1.03); /* Adjust the scale factor as needed */
+    box-shadow: 0 0 30px rgba(220, 247, 181, 0.8);
+}
+
+.input_button {
+    font-size: 30px;
+    background-color: rgba(179, 218, 162, 0.6); /* Semi-transparent background */
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    margin-left: 5px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    backdrop-filter: blur(10px); /* Adjust the blur value for the frosted effect */
+}
+
+.input_button:hover {
+    background-color: rgba(140, 167, 132, 0.6); /* Semi-transparent background on hover */
+    transform: scale(1.03); /* Adjust the scale factor as needed */
+    box-shadow: 0 0 30px rgba(220, 247, 181, 0.8);
+}
+
 
 .carbon_button{
     border-radius: 10px;
@@ -114,15 +144,45 @@ h2{
     margin-bottom: 5px;
 }
 
-.history{
+.history::before {
+  transform: scaleX(0);
+  transform-origin: bottom right;
+}
+
+.history:hover::before {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.history::before {
+  content: " ";
+  display: block;
+  border-radius: 30px;
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  inset: 0 0 0 0;
+  background: rgba(254, 249, 226, 0.6);
+  z-index: -1;
+  transition: transform .3s ease;
+}
+
+.history {
     border-radius: 30px;
-    border: 1px solid;
+    border: 1.5px solid;
     border-color: #FEF9E2;
     margin: 0 auto;
     margin-bottom: 20px;
-    background: #FEF9E2;
+    background: rgba(254, 249, 226, 0.6); /* Semi-transparent background */
     width: 80%;
-    text-align:center;
+    text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    position: relative;
+    backdrop-filter: blur(10px); /* Adjust the blur value for the frosted effect */
+}
+
+.history:hover {
+    transform: scale(1.03); /* Adjust the scale factor as needed */
+    box-shadow: 0 0 30px rgba(220, 247, 181, 0.8);
 }
 
 .history2{
