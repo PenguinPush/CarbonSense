@@ -168,13 +168,13 @@ def generate_game():
             randomitems1 = randomitems[0]
             randomitems2 = randomitems[1]
 
-            if randomitems1['total_carbon_emissions_kg'] > randomitems2['total_carbon_emissions_kg']:
+            if int(randomitems1['total_carbon_emissions_kg']) > int(randomitems2['total_carbon_emissions_kg']):
                 answer = True
             else:
                 answer = False
 
             print([randomitems1['item'], randomitems1['quantity'], randomitems2['item'], randomitems2['quantity'],
-                    randomitems1['total_carbon_emissions_kg'], randomitems2['total_carbon_emissions_kg'], answer])
+                   randomitems1['total_carbon_emissions_kg'], randomitems2['total_carbon_emissions_kg'], answer])
 
             return [randomitems1['item'], randomitems1['quantity'], randomitems2['item'], randomitems2['quantity'],
                     randomitems1['total_carbon_emissions_kg'], randomitems2['total_carbon_emissions_kg'], answer]
