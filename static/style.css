@@ -60,19 +60,26 @@ a:hover{
     
 }
 
-input{
-    border-radius: 10px;
-    padding:5px;
+.carbon_input{
+    padding-bottom: 1px;
+    border: 3px solid #ccc;
+    border-radius: 1px;
+    font-size: 20px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    width: 100;
 }
 
-.carbon_input{
+.carbon_calculator{
+    margin-top: 5px;
+    font-size: 20px;
+    width: 200px;
     padding-left: 25px;
 }
 
 .carbon_button{
     padding-top: 2px;
-    padding-left: 25px;
-    border-radius: 10px;
 }
 
 button {
