@@ -151,9 +151,6 @@ def game():
     return render_template('game.html')
 
 
-@app.route('/transit')
-def transit():
-    return render_template('transit.html') 
 
 @app.route('/about')
 def about():

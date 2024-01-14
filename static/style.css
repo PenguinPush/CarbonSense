@@ -124,6 +124,18 @@ h2{
     width: 80%;
     text-align:center;
 }
+
+.history2{
+    border-radius: 30px;
+    border: 1px solid;
+    border-color: #bfeeaa;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    background: #bfeeaa;
+    width: 80%;
+    text-align:center;
+}
 @media screen and (max-width: 650px) {
     body {
         text-align: center;
