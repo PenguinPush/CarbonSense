@@ -11,11 +11,13 @@
     {% extends 'base.html' %}
 
     {% block content %}
+    
     <div class="shopping_body">
+    <h2>Total Carbon Emissions: {{ total_carbon_emissions }} kg</h2>
         <div>
             <form method="post" action="/shopping">
-                <input type="text" id="item" name="item" placeholder = "item" required>
-                <input type="number" id="quantity" name="quantity" min="1" placeholder="quantity" required>
+                <input class = input type="text" id="item" name="item" placeholder = "item" required>
+                <input class = input type="number" id="quantity" name="quantity" min="1" placeholder="quantity" required>
 
                 <button type="submit">Add to Shopping List</button>
             </form>
