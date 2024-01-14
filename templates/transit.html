@@ -9,20 +9,25 @@
 <body>
     {% extends 'base.html' %}
     {% block content %}
-        <h1>Route Estimation - Result</h1>
-        <p>Distance: {{ distance }}</p>
-        <p>Decoded Route: {{ decoded_route }}</p>
-        <p>Carbon Emission Estimate: {{ carbon_emission_estimate }} kgCO2</p>
-        <p>Suggested Transit Route: {{ transit_route }}</p>
+    <div class="index_body">
+        <div class="empty">
 
-        <iframe
-          width="450"
-          height="250"
-          frameborder="0" style="border:0"
-          referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCMPdLpbgwvxDXT02Fwk8mqHfNPqop6rxk&origin=Oslo+Norway&destination=Telemark+Norway&avoid=tolls|highways"
-          >
-        </iframe>
+        </div>
+            <form method="post" action="/transit">
+                <div class = "transit_input_area">
+                    <div class="transit_carbon_input">
+                        <input class = "input_box" type="text" id="origin" name="origin" placeholder = "Origin" required>
+                        <input class = "input_box" type="text" id="destination" name="destination" placeholder = "Destination" required>
+                    </div>
+                    <div class = "transit_carbon_button">
+                        <button class = "input_button" type="submit">↩</button>
+                    </div>
+                </div>
+            </form>
+    </div>
+    <div>
+        <p class="history">{{info}}</p>
+    </div>
 
     {% endblock %}
 </body>

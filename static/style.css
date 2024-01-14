@@ -4,22 +4,23 @@ body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
     overflow: visible;
+    background-color: #E9E5D0;
 }
 
 .navbar {
     font-size: 20px;
-    background-color: #f2f7ff;
+    background-color: #9AB98D;
     font-style:italic;
     font-weight:bold;
     color: black;
     padding: 15px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center;#9AB98Dicon_
 }
 
 .icon_navbar{
-    background-color: #BDD7FF;
+    background-color: #bfeeaa;
     display: none;
 }
 
@@ -48,7 +49,7 @@ body {
 }
 
 a:hover{
-    color: grey;
+    color: white;
 }
 
 .icons{
@@ -61,7 +62,7 @@ a:hover{
 }
 
 .carbon_input{
-    color: lightgrey;
+    color: #BFEEAA;
     border-radius:10px;
     padding: 12px 24px;
     display: flex;
@@ -71,13 +72,20 @@ a:hover{
 
 .input_box{
     border-radius: 10px;
-    font-size: 80px;
+    font-size: 20px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    background-color: #f2f7ff;
+    background-color: #9AB98D;
+    color:BLACK;
+    
     border: none;
     padding: 12px 24px;
+}
+
+.input_button{
+    font-size:30px;
+    background-color:#B3DAA2;
 }
 
 .carbon_button{
@@ -90,7 +98,7 @@ a:hover{
 
 button {
     border-radius: 10px;
-    background-color: #f2f7ff;
+    background-color: #bfeeaa;
     border: none;
     font-size: 20;
     padding: 12px 24px;
@@ -109,10 +117,10 @@ h2{
 .history{
     border-radius: 30px;
     border: 1px solid;
-    border-color: #f2f7ff;
+    border-color: #FEF9E2;
     margin: 0 auto;
     margin-bottom: 20px;
-    background: #f2f7ff;
+    background: #FEF9E2;
     width: 80%;
     text-align:center;
 }
